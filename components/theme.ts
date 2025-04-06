@@ -1,14 +1,24 @@
 // theme.ts
+
+import { DefaultTheme } from 'react-native-paper';
+
 export const theme = {
+  ...DefaultTheme,
   colors: {
+    ...DefaultTheme.colors,
+    primary: '#495E57',
+    primaryLight: '#F4CE14',
     primaryMain: '#495E57',
     primarySec: '#F4CE14',
     secondOne: '#EE9972',
     secondTwo: '#FBDABB',
     white: '#EDEFEE',
     black: '#333333',
+    buttonColor: '#F4CE14',
+    buttonTextColor: '#333333',
   },
   fonts: {
+    ...DefaultTheme.fonts,
     displayTitle: {
       fontFamily: 'MarkaziText',
       fontSize: 64,

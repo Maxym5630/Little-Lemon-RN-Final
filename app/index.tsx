@@ -52,21 +52,15 @@ export default function Index() {
         <Text style={[styles.heroText]}>Let’s get to know you</Text>
       </View>
       <View style={styles.title}>
-        <Text style={[styles.titleText]}>Let’s get to know you</Text>
+        <Text style={[styles.titleText]}>Personal information</Text>
       </View>
-      <View style={{ flex: 1, gap: 20, paddingHorizontal: 20 }}>
+      <View style={styles.form}>
         <TextInput
           mode="outlined"
           label="First Name"
           placeholder="Enter your first name"
           value={firstName}
           onChangeText={setFirstName}
-          theme={{
-            colors: {
-              primary: colors.black,
-              background: colors.white,
-            },
-          }}
         />
         <TextInput
           mode="outlined"
@@ -74,12 +68,6 @@ export default function Index() {
           placeholder="Enter your last name"
           value={lastName}
           onChangeText={setLastName}
-          theme={{
-            colors: {
-              primary: colors.black,
-              background: colors.white,
-            },
-          }}
         />
         <TextInput
           mode="outlined"
@@ -88,18 +76,13 @@ export default function Index() {
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
-          theme={{
-            colors: {
-              primary: colors.black,
-              background: colors.white,
-            },
-          }}
         />
       </View>
       <Button
         mode="contained"
+        disabled={!firstName || !lastName || !isEmailValid(email)}
+        dark={false}
         buttonColor={colors.primarySec}
-        textColor={colors.black}
         style={styles.button}
         onPress={handleRegister}
       >
@@ -147,4 +130,5 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
   },
+  form: { flex: 1, gap: 20, paddingHorizontal: 20 },
 });

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import Header from '../components/Header';
 
 const home = () => {
-  return <Text>home</Text>;
+  return <Header />;
 };
 
 export default home;
