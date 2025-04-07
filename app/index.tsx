@@ -1,10 +1,10 @@
-import { colors, fonts } from '@/components/theme';
-import {Text, View, StyleSheet, Image, Alert} from 'react-native';
+import { colors, fonts } from '@/utils/theme';
+import { Text, View, StyleSheet, Image, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation, useRouter} from 'expo-router';
+import { useNavigation, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Button, TextInput } from 'react-native-paper';
-import Loader from "@/components/Loader";
+import Loader from '@/components/Loader';
 
 export default function Index() {
   const [firstName, setFirstName] = useState('');
@@ -15,12 +15,11 @@ export default function Index() {
   const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
-
     const checkUserLoggedIn = async () => {
       const userName = await AsyncStorage.getItem('firstName');
       if (userName) {
         router.replace('/home');
-      return
+        return;
       }
       setIsLoad(true);
     };
@@ -34,7 +33,7 @@ export default function Index() {
         ['firstName', firstName],
         ['lastName', lastName],
         ['email', email],
-          ['avatar', firstName[0].toUpperCase() + lastName[0].toUpperCase()],
+        ['avatar', firstName[0].toUpperCase() + lastName[0].toUpperCase()],
       ]);
       navigation.replace('home');
     } else {
@@ -42,12 +41,9 @@ export default function Index() {
     }
   };
 
-
-
   return !isLoad ? (
     <Loader />
-  ):
-  (
+  ) : (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image

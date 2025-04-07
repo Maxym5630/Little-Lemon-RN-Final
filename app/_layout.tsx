@@ -2,7 +2,7 @@ import { Stack, SplashScreen } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { PaperProvider } from 'react-native-paper';
-import theme from '@/components/theme';
+import theme from '@/utils/theme';
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +21,7 @@ export default function RootLayout() {
   }
   return (
     <PaperProvider theme={theme}>
-      <Stack initialRouteName="profile">
+      <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="home" options={{ headerShown: false }} />
         <Stack.Screen name="profile" options={{ headerShown: false }} />

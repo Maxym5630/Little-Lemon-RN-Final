@@ -23,6 +23,7 @@ export const theme = {
       fontFamily: 'MarkaziText',
       fontSize: 64,
       fontWeight: '500' as const,
+      lineHeight: 75,
     },
     subtitle: {
       fontFamily: 'MarkaziText',
