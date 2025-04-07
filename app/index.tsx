@@ -1,24 +1,31 @@
-import { colors, fonts } from '../components/theme';
-import { Text, View, StyleSheet, Image, Alert } from 'react-native';
+import { colors, fonts } from '@/components/theme';
+import {Text, View, StyleSheet, Image, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from 'expo-router';
+import {useNavigation, useRouter} from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Button, TextInput } from 'react-native-paper';
+import Loader from "@/components/Loader";
 
 export default function Index() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const navigation = useNavigation();
+  const router = useRouter();
+  const [isLoad, setIsLoad] = useState(false);
+
   useEffect(() => {
+
     const checkUserLoggedIn = async () => {
       const userName = await AsyncStorage.getItem('firstName');
       if (userName) {
-        navigation.replace('home');
+        router.replace('/home');
+      return
       }
+      setIsLoad(true);
     };
 
-    checkUserLoggedIn();
+    void checkUserLoggedIn();
   }, []);
 
   const handleRegister = async () => {
@@ -27,6 +34,7 @@ export default function Index() {
         ['firstName', firstName],
         ['lastName', lastName],
         ['email', email],
+          ['avatar', firstName[0].toUpperCase() + lastName[0].toUpperCase()],
       ]);
       navigation.replace('home');
     } else {
@@ -34,12 +42,12 @@ export default function Index() {
     }
   };
 
-  const isEmailValid = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
-  return (
+
+  return !isLoad ? (
+    <Loader />
+  ):
+  (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
@@ -91,6 +99,11 @@ export default function Index() {
     </View>
   );
 }
+
+export const isEmailValid = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
 const styles = StyleSheet.create({
   container: {

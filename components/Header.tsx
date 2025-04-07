@@ -1,28 +1,34 @@
 import React from 'react';
-import { Image, View, StyleSheet, Alert } from 'react-native';
-import { colors } from './theme';
-import { Link } from 'expo-router';
+import { Image, View, StyleSheet } from 'react-native';
+import Avatar from './Avatar';
+import {IconButton} from "react-native-paper";
+import {Link, useNavigation} from "expo-router";
 
-const Header = ({ isShow = true }) => {
+const Header = ({ isShow = false, avatar = ''}) => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.header}>
-      <View style={{ width: 50 }}></View>
+      {isShow ? (
+              <Link
+                  href="/home">
+                <IconButton
+                    style={{width: 50, height: 50}}
+                    icon={'keyboard-backspace'}
+                    onPress={() => {
+                      navigation.replace('home');
+                    }}
+                />
+              </Link>
+          ) :
+          (<View style={styles.spacer}></View>)}
       <Image
         source={require('../assets/images/Logo.png')}
         resizeMode="contain"
         style={styles.logo}
       ></Image>
-      {isShow ? (
-        <Link href="/profile">
-          <Image
-            source={require('../assets/images/Profile.png')}
-            resizeMode="contain"
-            style={styles.profile}
-          ></Image>
-        </Link>
-      ) : (
-        <View style={{ width: 50 }}></View>
-      )}
+      <Avatar avatar = {avatar} />
     </View>
   );
 };
