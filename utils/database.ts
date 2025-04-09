@@ -4,7 +4,7 @@ import { openDatabaseAsync, SQLiteDatabase } from 'expo-sqlite';
 let db: SQLiteDatabase;
 
 export const initDatabase = async () => {
-  db = await openDatabaseAsync('little_lemon_v4');
+  db = await openDatabaseAsync('little_lemon_v7');
   await db.execAsync(`
     CREATE TABLE IF NOT EXISTS menuitems (
       id INTEGER PRIMARY KEY NOT NULL,

@@ -83,8 +83,7 @@ const home = () => {
           menuItems = await fetchData();
           saveMenuItems(menuItems);
         }
-
-        setData(menuItems);
+        setFilteredData(menuItems);
       } catch (e) {
         Alert.alert(getErrorMessage(e));
       }
